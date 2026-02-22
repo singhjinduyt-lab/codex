@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TriLingo Local</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <h1>TriLingo Local</h1>
+      <p>Punjabi • Hindi • English learning with speaking practice and community goals.</p>
+    </header>
+
+    <main class="grid">
+      <section class="card" id="lessons">
+        <h2>Lessons</h2>
+        <label for="language">Choose language</label>
+        <select id="language"></select>
+        <ul id="lessonList"></ul>
+      </section>
+
+      <section class="card" id="speechPractice">
+        <h2>Speech Practice Scoring</h2>
+        <p id="targetPhrase"></p>
+        <div class="controls">
+          <button id="newPrompt">New Prompt</button>
+          <button id="recordBtn">Start Speaking</button>
+        </div>
+        <p><strong>Heard:</strong> <span id="heardText">(waiting)</span></p>
+        <p><strong>Score:</strong> <span id="score">0%</span></p>
+        <p class="hint">Uses your browser's local speech recognition when available.</p>
+      </section>
+
+      <section class="card" id="streaks">
+        <h2>Daily Streak</h2>
+        <p>Current streak: <span id="streakCount">0</span> days</p>
+        <button id="completeSession">Complete Today's Session</button>
+        <p id="streakMessage"></p>
+      </section>
+
+      <section class="card" id="challenges">
+        <h2>Community Challenges</h2>
+        <ul id="challengeList"></ul>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
