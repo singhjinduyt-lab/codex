@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Title & Thumbnail Optimizer</title>
+  <style>
+    :root {
+      --bg: #0f1226;
+      --panel: #181d3a;
+      --panel-soft: #202751;
+      --text: #f3f5ff;
+      --muted: #a9b2df;
+      --brand: #7b8cff;
+      --ok: #2dd4bf;
+      --warn: #fbbf24;
+      --bad: #fb7185;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top left, #1b2356, var(--bg) 45%);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 50px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.7rem, 2.3vw, 2.5rem);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 950px) {
+      .grid { grid-template-columns: 1.2fr 1fr; }
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--panel), #131834);
+      border: 1px solid #2c366d;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    label {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 12px 0 8px;
+    }
+
+    textarea, input, select {
+      width: 100%;
+      border: 1px solid #3a4685;
+      background: var(--panel-soft);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 700px) {
+      .row { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: linear-gradient(90deg, #6f83ff, #8b5cf6);
+      color: white;
+    }
+
+    .secondary {
+      background: #2a3367;
+      color: var(--text);
+      border: 1px solid #3a4685;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .kpi {
+      background: #111633;
+      border: 1px solid #293269;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .kpi .num {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 4px 0;
+    }
+
+    .good { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+
+    ul { padding-left: 18px; }
+    li { margin-bottom: 8px; }
+
+    .pill {
+      display: inline-block;
+      background: #28336e;
+      border: 1px solid #3a4685;
+      color: #d8dfff;
+      border-radius: 999px;
+      padding: 6px 10px;
+      margin: 5px 6px 0 0;
+      font-size: 0.84rem;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
+      white-space: pre-wrap;
+      background: #0f1433;
+      border: 1px solid #2b346f;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .pricing {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 760px) {
+      .pricing { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .price {
+      border: 1px solid #364286;
+      border-radius: 12px;
+      padding: 12px;
+      background: #131943;
+    }
+
+    .price h4 { margin: 0 0 6px; }
+    .price strong { font-size: 1.4rem; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>YouTube Title & Thumbnail Optimizer</h1>
+    <p class="subtitle">Paste a video idea and instantly generate optimized titles, tags, thumbnail text, SEO score, CTR prediction, and a Canva-ready export.</p>
+
+    <section class="grid">
+      <article class="card">
+        <label for="idea">Video Idea</label>
+        <textarea id="idea" placeholder="Example: I tested 12 AI video tools in 30 days to find the best one for beginner creators."></textarea>
+
+        <div class="row">
+          <div>
+            <label for="niche">Niche</label>
+            <select id="niche">
+              <option>Tech / AI</option>
+              <option>Business</option>
+              <option>Fitness</option>
+              <option>Education</option>
+              <option>Gaming</option>
+              <option>Lifestyle</option>
+            </select>
+          </div>
+          <div>
+            <label for="audience">Audience</label>
+            <input id="audience" value="Beginner creators" />
+          </div>
+          <div>
+            <label for="goal">Goal</label>
+            <select id="goal">
+              <option>Views</option>
+              <option>Subscribers</option>
+              <option>Course sales</option>
+              <option>Affiliate clicks</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="primary" id="optimizeBtn">Optimize Now</button>
+          <button class="secondary" id="exportBtn">Export to Canva (CSV)</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3 style="margin: 0;">Performance Preview</h3>
+        <div class="kpi-grid">
+          <div class="kpi">
+            <small>SEO Score</small>
+            <div class="num" id="seoScore">0 / 100</div>
+            <small id="seoHint">Add a video idea to calculate.</small>
+          </div>
+          <div class="kpi">
+            <small>Predicted CTR</small>
+            <div class="num" id="ctrScore">0.0%</div>
+            <small id="ctrHint">High curiosity + clear payoff improves CTR.</small>
+          </div>
+        </div>
+
+        <h4>Generated Titles</h4>
+        <ul id="titleList"></ul>
+
+        <h4>Thumbnail Text</h4>
+        <div id="thumbText"></div>
+
+        <h4>Suggested Tags</h4>
+        <div id="tagBox"></div>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top: 16px;">
+      <h3 style="margin-top:0;">Monetization: Creator Subscription</h3>
+      <p style="color: var(--muted);">Offer premium optimization credits and advanced analytics to recurring users.</p>
+      <div class="pricing">
+        <div class="price">
+          <h4>Starter</h4>
+          <strong>$9/mo</strong>
+          <ul>
+            <li>30 optimizations / month</li>
+            <li>Basic title + tag generation</li>
+            <li>Canva CSV export</li>
+          </ul>
+        </div>
+        <div class="price">
+          <h4>Creator Pro</h4>
+          <strong>$29/mo</strong>
+          <ul>
+            <li>Unlimited optimizations</li>
+            <li>A/B title variants + CTR benchmark</li>
+            <li>Competitor keyword suggestions</li>
+          </ul>
+        </div>
+        <div class="price">
+          <h4>Studio</h4>
+          <strong>$79/mo</strong>
+          <ul>
+            <li>Multi-channel workspace</li>
+            <li>Team seats + shared templates</li>
+            <li>Priority support + API access</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top: 16px;">
+      <h3 style="margin-top:0;">Canva Export Preview</h3>
+      <div class="mono" id="csvPreview">title,thumbnail_text,tags\n</div>
+    </section>
+  </main>
+
+  <script>
+    const buzzWords = ["best", "tested", "secret", "fast", "mistakes", "beginner", "2026", "step-by-step", "results", "AI"];
+
+    const elements = {
+      idea: document.getElementById('idea'),
+      niche: document.getElementById('niche'),
+      audience: document.getElementById('audience'),
+      goal: document.getElementById('goal'),
+      seoScore: document.getElementById('seoScore'),
+      seoHint: document.getElementById('seoHint'),
+      ctrScore: document.getElementById('ctrScore'),
+      ctrHint: document.getElementById('ctrHint'),
+      titleList: document.getElementById('titleList'),
+      thumbText: document.getElementById('thumbText'),
+      tagBox: document.getElementById('tagBox'),
+      csvPreview: document.getElementById('csvPreview'),
+      optimizeBtn: document.getElementById('optimizeBtn'),
+      exportBtn: document.getElementById('exportBtn')
+    };
+
+    function tokenize(text) {
+      return text.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/).filter(Boolean);
+    }
+
+    function topKeywords(tokens, limit = 6) {
+      const counts = {};
+      tokens.forEach((t) => {
+        if (t.length < 4) return;
+        counts[t] = (counts[t] || 0) + 1;
+      });
+      return Object.entries(counts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, limit)
+        .map(([word]) => word);
+    }
+
+    function titleCase(str) {
+      return str.replace(/\w\S*/g, (txt) => txt[0].toUpperCase() + txt.slice(1));
+    }
+
+    function generateTitles(idea, keywords, audience) {
+      const base = idea.length > 110 ? idea.slice(0, 110).trim() + '…' : idea;
+      const k1 = keywords[0] || 'YouTube';
+      const k2 = keywords[1] || 'growth';
+      return [
+        `I Tried ${k1} for 30 Days — Here’s What Happened`,
+        `${titleCase(k1)} vs ${titleCase(k2)}: Which Wins for ${audience}?`,
+        `${titleCase(base)} (Do This Before You Post)`
+      ];
+    }
+
+    function scoreSeo(idea, tags, titles) {
+      const lengthScore = Math.max(0, 30 - Math.abs(60 - idea.length));
+      const tagScore = Math.min(tags.length * 4, 28);
+      const titleScore = titles.some((t) => /\d|\?|:/.test(t)) ? 22 : 14;
+      const keywordHit = buzzWords.filter((w) => idea.toLowerCase().includes(w)).length * 4;
+      return Math.min(100, lengthScore + tagScore + titleScore + keywordHit);
+    }
+
+    function predictCtr(seoScore, titles) {
+      const curiosityBoost = titles.filter((t) => /\?|happened|secret|before/i.test(t)).length * 0.5;
+      const base = 2.4 + (seoScore / 100) * 6.2 + curiosityBoost;
+      return Math.min(15.5, base).toFixed(1);
+    }
+
+    function makeTags(keywords, niche) {
+      const nicheTag = niche.toLowerCase().replace(/\s*\/\s*/g, ' ');
+      const defaults = ['youtube tips', 'thumbnail design', 'video seo', 'title ideas'];
+      return [...new Set([...keywords.map((k) => `${k} tutorial`), ...defaults, nicheTag])].slice(0, 12);
+    }
+
+    function makeThumbText(idea, keywords) {
+      const k1 = (keywords[0] || 'AI').toUpperCase();
+      const k2 = (keywords[1] || 'RESULTS').toUpperCase();
+      return [`${k1} TESTED`, `REAL ${k2}`, 'DON\'T POST YET'];
+    }
+
+    function setScoreStyles(node, value, high, medium) {
+      node.classList.remove('good', 'warn', 'bad');
+      node.classList.add(value >= high ? 'good' : value >= medium ? 'warn' : 'bad');
+    }
+
+    function optimize() {
+      const idea = elements.idea.value.trim();
+      if (!idea) {
+        alert('Paste a video idea first.');
+        return;
+      }
+
+      const tokens = tokenize(`${idea} ${elements.audience.value} ${elements.goal.value}`);
+      const keywords = topKeywords(tokens);
+      const tags = makeTags(keywords, elements.niche.value);
+      const titles = generateTitles(idea, keywords, elements.audience.value);
+      const thumb = makeThumbText(idea, keywords);
+      const seo = scoreSeo(idea, tags, titles);
+      const ctr = Number(predictCtr(seo, titles));
+
+      elements.seoScore.textContent = `${seo} / 100`;
+      elements.seoHint.textContent = seo > 75 ? 'Great discoverability potential.' : 'Improve keyword depth + title structure.';
+      elements.ctrScore.textContent = `${ctr.toFixed(1)}%`;
+      elements.ctrHint.textContent = ctr > 8 ? 'Strong hook potential for recommended feed.' : 'Try sharper promise + curiosity phrase.';
+
+      setScoreStyles(elements.seoScore, seo, 75, 50);
+      setScoreStyles(elements.ctrScore, ctr, 8, 5);
+
+      elements.titleList.innerHTML = titles.map((t) => `<li>${t}</li>`).join('');
+      elements.thumbText.innerHTML = thumb.map((t) => `<span class="pill">${t}</span>`).join('');
+      elements.tagBox.innerHTML = tags.map((t) => `<span class="pill">#${t.replace(/\s+/g, '')}</span>`).join('');
+
+      const csvRows = titles.map((title, i) => {
+        const thumbLine = thumb[i % thumb.length];
+        return `"${title.replaceAll('"', '""')}","${thumbLine}","${tags.join(' | ')}"`;
+      });
+      elements.csvPreview.textContent = `title,thumbnail_text,tags\n${csvRows.join('\n')}`;
+    }
+
+    function exportCsv() {
+      const blob = new Blob([elements.csvPreview.textContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'canva-youtube-optimizer.csv';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    elements.optimizeBtn.addEventListener('click', optimize);
+    elements.exportBtn.addEventListener('click', exportCsv);
+
+    elements.idea.value = 'I tested 12 AI editing apps to see which one grows new YouTube channels fastest.';
+    optimize();
+  </script>
+</body>
+</html>
