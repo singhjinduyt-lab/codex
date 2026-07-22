@@ -26,3 +26,7 @@ The app is packaged as `com.jarvis.launcher` and registers a HOME intent so Andr
 ## Step 3: Navigation
 
 Navigation is centralized in `JarvisDestination` and `JarvisNavigationActions` so feature screens use typed destinations instead of duplicating route strings or `NavOptions`. `JarvisNavHost` owns the graph and currently wires Home, Search, App Drawer, AI Chat, and Settings.
+
+## Step 4: Theme
+
+The theme layer defines JARVIS design tokens for color, typography, shape, spacing, and elevation. `JarvisTheme` supports dark mode by default, optional Android dynamic color, Material 3 color schemes, and system bar appearance updates.
